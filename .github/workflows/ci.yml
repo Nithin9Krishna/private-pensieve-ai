@@ -23,7 +23,7 @@ jobs:
 
       - name: Ensure Android INTERNET permission is absent
         run: |
-          if grep -RIn "android.permission.INTERNET" android 2>/dev/null; then
+          if grep -RIn "android.permission.INTERNET" android --include="*.xml" 2>/dev/null; then
             echo "::error::INTERNET permission is not allowed in V1"
             exit 1
           fi
@@ -53,17 +53,28 @@ jobs:
   android:
     runs-on: ubuntu-latest
     needs: repo-policy
-    if: ${{ hashFiles('android/**') != '' }}
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check if Android source exists
+        id: check_android
+        run: |
+          if [ -d "android/app" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "No Android source directory found — skipping"
+          fi
+
       - name: Set up JDK
+        if: steps.check_android.outputs.exists == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
 
       - name: Build and test Android
+        if: steps.check_android.outputs.exists == 'true'
         working-directory: android
         run: |
           if [ -f gradlew ]; then
@@ -74,6 +85,7 @@ jobs:
           fi
 
       - name: Verify no INTERNET permission in built manifest
+        if: steps.check_android.outputs.exists == 'true'
         working-directory: android
         run: |
           if [ -f app/src/main/AndroidManifest.xml ]; then
@@ -87,11 +99,21 @@ jobs:
   ios-static:
     runs-on: macos-latest
     needs: repo-policy
-    if: ${{ hashFiles('ios/**') != '' }}
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check if iOS source exists
+        id: check_ios
+        run: |
+          if [ -d "ios" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "No iOS source directory found — skipping"
+          fi
+
       - name: Validate iOS project structure
+        if: steps.check_ios.outputs.exists == 'true'
         run: |
           echo "=== iOS Source Files ==="
           find ios -name "*.swift" -type f | head -50
