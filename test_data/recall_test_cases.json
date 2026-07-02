@@ -1,0 +1,62 @@
+[
+  {
+    "id": "r001",
+    "question": "Why does offline access matter to me?",
+    "available_memory_ids": ["t002"],
+    "must_reference": ["flying or camping", "without the internet"]
+  },
+  {
+    "id": "r002",
+    "question": "What did I say about my wedding?",
+    "available_memory_ids": [],
+    "expected_exact_fallback": "I don't remember you telling me that yet."
+  },
+  {
+    "id": "r003",
+    "question": "When was I feeling stressed?",
+    "available_memory_ids": ["t010", "t015"],
+    "must_reference": ["overwhelmed", "work", "deadline"]
+  },
+  {
+    "id": "r004",
+    "question": "What did I say about Sarah?",
+    "available_memory_ids": ["t004"],
+    "must_reference": ["Sarah", "apologize"]
+  },
+  {
+    "id": "r005",
+    "question": "What are my goals?",
+    "available_memory_ids": ["t007", "t012", "t015"],
+    "must_reference": ["reading", "start business", "break stress eating"]
+  },
+  {
+    "id": "r006",
+    "question": "Tell me about my trip to Paris.",
+    "available_memory_ids": [],
+    "expected_exact_fallback": "I don't remember you telling me that yet."
+  },
+  {
+    "id": "r007",
+    "question": "What made me happy recently?",
+    "available_memory_ids": ["t011", "t014"],
+    "must_reference": ["hike", "Maya", "first sentence"]
+  },
+  {
+    "id": "r008",
+    "question": "What have I said about privacy?",
+    "available_memory_ids": ["t001", "t009"],
+    "must_reference": ["privacy", "trust"]
+  },
+  {
+    "id": "r009",
+    "question": "Who did I mention recently?",
+    "available_memory_ids": ["t004", "t006", "t011", "t014"],
+    "must_reference": ["Sarah", "Dr. Chen", "Alex", "Maya"]
+  },
+  {
+    "id": "r010",
+    "question": "What did I dream about last night?",
+    "available_memory_ids": [],
+    "expected_exact_fallback": "I don't remember you telling me that yet."
+  }
+]

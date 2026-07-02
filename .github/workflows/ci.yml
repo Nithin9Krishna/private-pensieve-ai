@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches: [dev]
+
+jobs:
+  repo-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject forbidden cloud/analytics/remote dependencies
+        run: |
+          FORBIDDEN_PATTERNS="firebase|supabase|amplitude|mixpanel|segment\.com|segment-io|analytics-kotlin|sentry|crashlytics|appsflyer|braze|adjust\.com|cloud_firestore|aws-sdk|azure|googleapis\.com|api\.openai|anthropic|huggingface.*api|replicate|together.*api|groq|auth0|clerk|okta|login.*sdk|signin"
+          if grep -RInE "$FORBIDDEN_PATTERNS" ios android --include="*.swift" --include="*.kt" --include="*.kts" --include="*.xml" --include="*.plist" --include="*.gradle" --include="*.resolved" --include="*.lock" 2>/dev/null; then
+            echo "::error::Forbidden cloud/analytics/remote dependency detected"
+            exit 1
+          fi
+          echo "✓ No forbidden dependencies found"
+
+      - name: Ensure Android INTERNET permission is absent
+        run: |
+          if grep -RIn "android.permission.INTERNET" android 2>/dev/null; then
+            echo "::error::INTERNET permission is not allowed in V1"
+            exit 1
+          fi
+          echo "✓ No INTERNET permission found"
+
+      - name: Ensure no remote API endpoints
+        run: |
+          URL_PATTERNS="https?://[a-zA-Z0-9].*\.(com|io|org|net|ai|dev)"
+          # Exclude build tool URLs (gradle, maven, apple)
+          if grep -RInE "$URL_PATTERNS" ios android --include="*.swift" --include="*.kt" --include="*.xml" 2>/dev/null | grep -vE "gradle|maven|apple\.com|android\.com|schemas\.android|jetbrains|kotlinlang|github\.com" ; then
+            echo "::warning::Possible remote API endpoint detected — review manually"
+          fi
+          echo "✓ Remote endpoint check complete"
+
+      - name: Check required docs
+        run: |
+          test -f AGENTS.md
+          test -f docs/PRD.md
+          test -f docs/ARCHITECTURE.md
+          test -f docs/MEMORY_SCHEMA.md
+          test -f docs/PRIVACY_RULES.md
+          test -f docs/RECALL_PIPELINE.md
+          test -f docs/IMPLEMENTATION_PLAN.md
+          test -f docs/DECISIONS.md
+          echo "✓ All required docs present"
+
+  android:
+    runs-on: ubuntu-latest
+    needs: repo-policy
+    if: ${{ hashFiles('android/**') != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build and test Android
+        working-directory: android
+        run: |
+          if [ -f gradlew ]; then
+            chmod +x gradlew
+            ./gradlew test --no-daemon
+          else
+            echo "Android scaffold not initialized yet — skipping build"
+          fi
+
+      - name: Verify no INTERNET permission in built manifest
+        working-directory: android
+        run: |
+          if [ -f app/src/main/AndroidManifest.xml ]; then
+            if grep -q "android.permission.INTERNET" app/src/main/AndroidManifest.xml; then
+              echo "::error::INTERNET permission found in AndroidManifest.xml"
+              exit 1
+            fi
+          fi
+          echo "✓ Manifest clean"
+
+  ios-static:
+    runs-on: macos-latest
+    needs: repo-policy
+    if: ${{ hashFiles('ios/**') != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate iOS project structure
+        run: |
+          echo "=== iOS Source Files ==="
+          find ios -name "*.swift" -type f | head -50
+          echo "=== Checking for forbidden imports ==="
+          if grep -RInE "import (Firebase|Amplitude|Mixpanel|Sentry|OpenAI)" ios --include="*.swift" 2>/dev/null; then
+            echo "::error::Forbidden SDK import found in iOS source"
+            exit 1
+          fi
+          echo "✓ iOS structure validated"

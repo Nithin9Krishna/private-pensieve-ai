@@ -1,0 +1,15 @@
+.DS_Store
+.idea/
+.vscode/
+DerivedData/
+.build/
+Pods/
+*.xcworkspace/xcuserdata/
+android/.gradle/
+android/build/
+android/app/build/
+*.jks
+*.keystore
+*.mobileprovision
+*.p12
+.env
