@@ -1,0 +1,22 @@
+[
+  {
+    "memory_id": "memory-001",
+    "created_at": "2026-05-18T21:00:00-05:00",
+    "updated_at": "2026-05-18T21:00:00-05:00",
+    "source_type": "voice",
+    "source_conversation_id": "conversation-001",
+    "title": "Coffee with Maya at the lake",
+    "summary": "The user had coffee with Maya at the lake and felt calmer after discussing their job search.",
+    "raw_transcript": "I had coffee with Maya at the lake today. I felt calmer after talking about my job search.",
+    "emotion_tags": ["calm"],
+    "topic_tags": ["coffee", "job search"],
+    "people_tags": ["Maya"],
+    "place_tags": ["lake"],
+    "goal_tags": ["job search"],
+    "importance_score": 4,
+    "confidence_score": 0.92,
+    "is_favorite": false,
+    "is_archived": false,
+    "is_deleted": false
+  }
+]
