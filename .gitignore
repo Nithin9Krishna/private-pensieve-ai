@@ -13,3 +13,4 @@ android/app/build/
 *.mobileprovision
 *.p12
 .env
+*.zip
