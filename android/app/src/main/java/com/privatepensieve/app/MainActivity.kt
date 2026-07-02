@@ -5,7 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.privatepensieve.app.navigation.PensieveApp
+import com.privatepensieve.app.onboarding.OnboardingFlow
+import com.privatepensieve.app.onboarding.isOnboardingComplete
 import com.privatepensieve.app.ui.theme.PrivatePensieveTheme
+import androidx.compose.runtime.*
 
 /**
  * Main entry point — Private Pensieve AI
@@ -17,7 +20,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PrivatePensieveTheme {
-                PensieveApp()
+                var onboardingDone by remember {
+                    mutableStateOf(isOnboardingComplete(this@MainActivity))
+                }
+
+                if (onboardingDone) {
+                    PensieveApp()
+                } else {
+                    OnboardingFlow(onComplete = { onboardingDone = true })
+                }
             }
         }
     }

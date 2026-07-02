@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- App Identity -->
+    <key>CFBundleName</key>
+    <string>Private Pensieve</string>
+    <key>CFBundleDisplayName</key>
+    <string>Pensieve</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.1.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+
+    <!-- Launch -->
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+
+    <!-- Privacy Permissions — required for voice features -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Pensieve uses your microphone to record voice memos. All audio stays on your device and is never uploaded.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Pensieve uses on-device speech recognition to transcribe your voice. No audio data is sent to any server.</string>
+
+    <!-- Prevent network access at OS level -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <!-- No network exceptions needed — app is fully offline -->
+    </dict>
+
+    <!-- Device capabilities -->
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+        <string>armv7</string>
+    </array>
+
+    <!-- Orientations -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+
+    <!-- Dark mode -->
+    <key>UIUserInterfaceStyle</key>
+    <string>Dark</string>
+</dict>
+</plist>

@@ -6,10 +6,19 @@ import SwiftUI
 
 @main
 struct PrivatePensieveApp: App {
+    @StateObject private var onboardingState = OnboardingState()
+
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .preferredColorScheme(.dark)
+            Group {
+                if onboardingState.isComplete {
+                    MainTabView()
+                } else {
+                    OnboardingFlow()
+                        .environmentObject(onboardingState)
+                }
+            }
+            .preferredColorScheme(.dark)
         }
     }
 }
