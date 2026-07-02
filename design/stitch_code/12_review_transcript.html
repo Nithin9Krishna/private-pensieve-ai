@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --privacy-glow: rgba(167, 139, 250, 0.15);
+        }
+        body {
+            background-color: #101419;
+            color: #e0e2ea;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(18, 25, 35, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .low-confidence {
+            text-decoration: underline;
+            text-decoration-color: #a78bfa;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .low-confidence:hover {
+            background-color: rgba(167, 139, 250, 0.1);
+        }
+        .pensieve-orb-mini {
+            background: radial-gradient(circle at center, #a78bfa, #7c5cfc);
+            filter: blur(20px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .custom-toggle:checked + .toggle-slider {
+            background-color: #a78bfa;
+        }
+        .custom-toggle:checked + .toggle-slider::before {
+            transform: translateX(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#948e9d",
+                        "outline-variant": "#494552",
+                        "primary": "#cebdff",
+                        "on-primary-fixed": "#21005e",
+                        "primary-fixed": "#e8ddff",
+                        "on-secondary-fixed": "#00201d",
+                        "on-tertiary-fixed-variant": "#4918c8",
+                        "on-background": "#e0e2ea",
+                        "on-secondary-container": "#00302c",
+                        "inverse-primary": "#674bb5",
+                        "on-tertiary": "#32009a",
+                        "surface-container-lowest": "#0a0e13",
+                        "surface-container": "#1c2025",
+                        "on-error": "#690005",
+                        "primary-container": "#a78bfa",
+                        "secondary": "#62d9cc",
+                        "surface-tint": "#cebdff",
+                        "on-primary-fixed-variant": "#4f319c",
+                        "surface-dim": "#101419",
+                        "on-primary": "#381385",
+                        "on-tertiary-fixed": "#1c0062",
+                        "surface": "#101419",
+                        "surface-container-highest": "#31353b",
+                        "secondary-container": "#11a296",
+                        "on-secondary-fixed-variant": "#00504a",
+                        "background": "#101419",
+                        "primary-fixed-dim": "#cebdff",
+                        "surface-container-high": "#262a30",
+                        "inverse-on-surface": "#2d3136",
+                        "tertiary-fixed-dim": "#cabeff",
+                        "surface-variant": "#31353b",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#003733",
+                        "on-tertiary-container": "#3600a4",
+                        "inverse-surface": "#e0e2ea",
+                        "on-primary-container": "#3c1989",
+                        "on-surface": "#e0e2ea",
+                        "secondary-fixed-dim": "#62d9cc",
+                        "tertiary": "#cabeff",
+                        "secondary-fixed": "#80f6e8",
+                        "surface-container-low": "#181c21",
+                        "surface-bright": "#36393f",
+                        "on-surface-variant": "#cac4d4",
+                        "tertiary-container": "#a18cff",
+                        "tertiary-fixed": "#e6deff"
+                    },
+                    "spacing": {
+                        "stack-gap-sm": "8px",
+                        "grid-gutter": "16px",
+                        "stack-gap-lg": "32px",
+                        "stack-gap-md": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background text-primary dark:text-primary flex justify-between items-center w-full px-container-margin py-4 top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="shield_lock">shield_lock</span>
+<h1 class="font-headline-md text-headline-md font-bold">Pensieve</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col px-container-margin pt-6 pb-32">
+<!-- Headline Section -->
+<div class="mb-stack-gap-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">I heard this</h2>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="info">info</span>
+<p class="font-body-md text-body-md">This will be saved to your private vault.</p>
+</div>
+</div>
+<!-- Editable Transcript Surface -->
+<section class="relative flex-grow flex flex-col">
+<div class="pensieve-orb-mini absolute -top-10 -right-10 w-48 h-48 rounded-full"></div>
+<div class="glass-panel rounded-[20px] p-6 flex-grow flex flex-col shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="text-secondary border border-secondary/30 rounded-full px-3 py-1 text-label-sm font-label-sm">Local-only</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</button>
+</div>
+<div class="font-body-lg text-body-lg text-on-surface leading-relaxed focus:outline-none h-full min-h-[300px]" contenteditable="true" id="transcript-surface">
+                    Yesterday was a strange day, I found myself thinking about that <span class="low-confidence">old bookstore</span> we used to visit. The air smelled like <span class="low-confidence">vanilla and paper</span>. I should probably reach out to Sarah and see if she remembers the name of the owner, the one who always gave us <span class="low-confidence">dried jasmine</span> tea. It felt like a safe haven from the noise outside. I want to keep this memory <span class="low-confidence">untethered</span> from the digital chaos.
+                </div>
+</div>
+</section>
+<!-- Controls Section -->
+<section class="mt-stack-gap-lg space-y-6">
+<!-- Audio Retention Toggle -->
+<div class="flex items-center justify-between glass-panel p-4 rounded-xl">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Keep audio recording?</span>
+<span class="text-[12px] text-on-surface-variant">Defaults to off for maximum privacy</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer custom-toggle" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer transition-all duration-300 toggle-slider relative before:content-[''] before:absolute before:top-[2px] before:left-[2px] before:bg-white before:rounded-full before:h-5 before:w-5 before:transition-all"></div>
+</label>
+</div>
+<!-- Primary Actions -->
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 bg-primary-container text-on-primary-container font-headline-md text-headline-md rounded-full shadow-lg shadow-primary-container/20 active:scale-[0.98] transition-all duration-200">
+                    Save as memory
+                </button>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 bg-surface-container text-on-surface font-label-md text-label-md rounded-full hover:bg-surface-container-high transition-colors">
+                        Edit
+                    </button>
+<button class="py-3 bg-error-container/20 text-error font-label-md text-label-md rounded-full hover:bg-error-container/30 transition-colors">
+                        Don’t save
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container dark:bg-surface-container border-t border-outline-variant/10 shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary dark:text-primary rounded-full px-4 py-1 scale-95 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined fill-icon" data-icon="mic">mic</span>
+<span class="font-label-sm text-label-sm">Talk</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="font-label-sm text-label-sm">Recall</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="encrypted">encrypted</span>
+<span class="font-label-sm text-label-sm">Privacy</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for the transcript surface
+        const surface = document.getElementById('transcript-surface');
+        
+        surface.addEventListener('focus', () => {
+            surface.parentElement.classList.add('ring-1', 'ring-primary/30');
+        });
+
+        surface.addEventListener('blur', () => {
+            surface.parentElement.classList.remove('ring-1', 'ring-primary/30');
+        });
+
+        // Toggle handling (visual feedback only)
+        const toggle = document.querySelector('.custom-toggle');
+        toggle.addEventListener('change', (e) => {
+            if(e.target.checked) {
+                console.log('Audio retention enabled');
+            } else {
+                console.log('Audio retention disabled');
+            }
+        });
+
+        // Handle low-confidence word clicks (simulating AI refinement)
+        document.querySelectorAll('.low-confidence').forEach(word => {
+            word.addEventListener('click', function(e) {
+                const currentText = this.innerText;
+                const suggestion = prompt(`Clarify "${currentText}":`, currentText);
+                if (suggestion) {
+                    this.innerText = suggestion;
+                    this.classList.remove('low-confidence');
+                }
+            });
+        });
+    </script>
+</body></html>

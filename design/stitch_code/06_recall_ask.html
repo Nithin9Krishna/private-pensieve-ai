@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pensieve - Recall</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#948e9d",
+                    "outline-variant": "#494552",
+                    "primary": "#cebdff",
+                    "on-primary-fixed": "#21005e",
+                    "primary-fixed": "#e8ddff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-tertiary-fixed-variant": "#4918c8",
+                    "on-background": "#e0e2ea",
+                    "on-secondary-container": "#00302c",
+                    "inverse-primary": "#674bb5",
+                    "on-tertiary": "#32009a",
+                    "surface-container-lowest": "#0a0e13",
+                    "surface-container": "#1c2025",
+                    "on-error": "#690005",
+                    "primary-container": "#a78bfa",
+                    "secondary": "#62d9cc",
+                    "surface-tint": "#cebdff",
+                    "on-primary-fixed-variant": "#4f319c",
+                    "surface-dim": "#101419",
+                    "on-primary": "#381385",
+                    "on-tertiary-fixed": "#1c0062",
+                    "surface": "#101419",
+                    "surface-container-highest": "#31353b",
+                    "secondary-container": "#11a296",
+                    "on-secondary-fixed-variant": "#00504a",
+                    "background": "#101419",
+                    "primary-fixed-dim": "#cebdff",
+                    "surface-container-high": "#262a30",
+                    "inverse-on-surface": "#2d3136",
+                    "tertiary-fixed-dim": "#cabeff",
+                    "surface-variant": "#31353b",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#003733",
+                    "on-tertiary-container": "#3600a4",
+                    "inverse-surface": "#e0e2ea",
+                    "on-primary-container": "#3c1989",
+                    "on-surface": "#e0e2ea",
+                    "secondary-fixed-dim": "#62d9cc",
+                    "tertiary": "#cabeff",
+                    "secondary-fixed": "#80f6e8",
+                    "surface-container-low": "#181c21",
+                    "surface-bright": "#36393f",
+                    "on-surface-variant": "#cac4d4",
+                    "tertiary-container": "#a18cff",
+                    "tertiary-fixed": "#e6deff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "grid-gutter": "16px",
+                    "stack-gap-lg": "32px",
+                    "stack-gap-md": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0B0F14;
+            color: #e0e2ea;
+            -webkit-font-smoothing: antialiased;
+        }
+        .privacy-glow {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.05);
+        }
+        .orb-gradient {
+            background: radial-gradient(circle at center, #A78BFA 0%, #7C5CFC 100%);
+        }
+        .glass-panel {
+            background: rgba(18, 25, 35, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 4s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface selection:bg-primary/30">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center px-container-margin py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Pensieve</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-container-margin min-h-screen max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
+<!-- Atmospheric Background Element -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden">
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] orb-gradient blur-[120px] opacity-10 animate-pulse-soft"></div>
+</div>
+<!-- Header Section -->
+<section class="mb-12 relative z-10">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-2 text-on-surface">Ask your past self</h2>
+<p class="text-on-surface-variant font-body-md opacity-70">I’ll search only what you saved.</p>
+</section>
+<!-- Search Container -->
+<section class="w-full max-w-2xl relative z-10 mb-12">
+<div class="glass-panel rounded-full p-2 flex items-center shadow-2xl privacy-glow">
+<div class="pl-6 pr-4">
+<span class="material-symbols-outlined text-primary">search</span>
+</div>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-lg font-body-lg text-on-surface placeholder:text-outline-variant py-4" placeholder="Describe a memory or ask a question..." type="text"/>
+<button class="bg-primary-container text-on-primary-container h-12 w-12 rounded-full flex items-center justify-center mr-2 hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+</section>
+<!-- Suggested Questions -->
+<section class="w-full max-w-2xl relative z-10">
+<h3 class="text-label-sm font-label-sm text-outline uppercase tracking-widest mb-6 text-center">Suggested for you</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<button class="glass-panel p-5 rounded-[20px] text-left hover:bg-surface-container-high transition-colors group flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary mt-1">auto_awesome</span>
+<div>
+<p class="font-body-md text-on-surface group-hover:text-primary transition-colors">"What did I learn about AI last week?"</p>
+<p class="text-label-sm text-outline-variant mt-1">Based on 3 recorded thoughts</p>
+</div>
+</button>
+<button class="glass-panel p-5 rounded-[20px] text-left hover:bg-surface-container-high transition-colors group flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary mt-1">flag</span>
+<div>
+<p class="font-body-md text-on-surface group-hover:text-primary transition-colors">"Recent goals I mentioned"</p>
+<p class="text-label-sm text-outline-variant mt-1">From your session yesterday</p>
+</div>
+</button>
+<button class="glass-panel p-5 rounded-[20px] text-left hover:bg-surface-container-high transition-colors group flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">history_edu</span>
+<div>
+<p class="font-body-md text-on-surface group-hover:text-primary transition-colors">"Ideas for the garden project"</p>
+<p class="text-label-sm text-outline-variant mt-1">Last discussed May 12</p>
+</div>
+</button>
+<button class="glass-panel p-5 rounded-[20px] text-left hover:bg-surface-container-high transition-colors group flex items-start gap-4">
+<span class="material-symbols-outlined text-on-surface-variant mt-1">lightbulb</span>
+<div>
+<p class="font-body-md text-on-surface group-hover:text-primary transition-colors">"Books recommended by Sarah"</p>
+<p class="text-label-sm text-outline-variant mt-1">Captured in March</p>
+</div>
+</button>
+</div>
+</section>
+<!-- Privacy Badge -->
+<div class="mt-16 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant/30 text-label-sm font-label-sm text-outline">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+            Local-only Processing
+        </div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container rounded-t-xl border-t border-outline-variant/10 shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">mic</span>
+<span class="font-label-sm text-label-sm mt-1">Talk</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-sm text-label-sm mt-1">Vault</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-full px-6 py-2 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="font-label-sm text-label-sm mt-1">Recall</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">encrypted</span>
+<span class="font-label-sm text-label-sm mt-1">Privacy</span>
+</a>
+</nav>
+<!-- Image Placeholder Section for Visual Context (not rendered in UI but for design system compliance) -->
+<div class="hidden">
+<img data-alt="A cinematic, ultra-wide shot of a dark, serene digital sanctuary. In the center, a soft, ethereal lavender orb pulses with gentle light. The room has polished obsidian floors reflecting the orb's glow. The lighting is low and moody, evoking a sense of deep solitude and high-end privacy. The overall aesthetic is minimal, luxurious, and technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0V13_y_1MmyiZv78R6GU4BgkLLPryBbmYZ6KFcytDC8J4XkTO96gEjNT6i3qfN4OiaK_hwmrjPByOVVwVYqXAakb54mTxlR8ogXNF9HBa7alZblCoe0vKznbfczXMV0giKV29QT2Clhccgcynt2bwRMNz9Dtw5uLkCA2zeU8AYw_m_EjSPpbiCX9pxB1aCX_41siT2qsVipRY4Rr_9x7weUNnEEsY7DShLgN8NYCgSqfaU1TbheNZoM8_r1s4qhotZI8BK2RqRQ8"/>
+</div>
+<script>
+        // Simple micro-interaction for the search bar
+        const searchInput = document.querySelector('input');
+        const searchContainer = searchInput.closest('.glass-panel');
+
+        searchInput.addEventListener('focus', () => {
+            searchContainer.style.boxShadow = "0 0 30px rgba(167, 139, 250, 0.15)";
+            searchContainer.style.borderColor = "rgba(167, 139, 250, 0.4)";
+        });
+
+        searchInput.addEventListener('blur', () => {
+            searchContainer.style.boxShadow = "0 0 20px rgba(167, 139, 250, 0.05)";
+            searchContainer.style.borderColor = "rgba(255, 255, 255, 0.05)";
+        });
+
+        // Add ripple effect logic (simulated for listening)
+        const micBtn = document.querySelector('button .material-symbols-outlined[content="mic"]')?.parentElement;
+        if (micBtn) {
+            micBtn.addEventListener('mousedown', () => {
+                micBtn.classList.add('scale-110');
+                micBtn.style.boxShadow = "0 0 40px rgba(167, 139, 250, 0.6)";
+            });
+            micBtn.addEventListener('mouseup', () => {
+                micBtn.classList.remove('scale-110');
+                micBtn.style.boxShadow = "0 10px 15px -3px rgba(167, 139, 250, 0.2)";
+            });
+        }
+    </script>
+</body></html>

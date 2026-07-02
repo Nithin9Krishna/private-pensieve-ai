@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pensieve - Recall</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#948e9d",
+                    "outline-variant": "#494552",
+                    "primary": "#cebdff",
+                    "on-primary-fixed": "#21005e",
+                    "primary-fixed": "#e8ddff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-tertiary-fixed-variant": "#4918c8",
+                    "on-background": "#e0e2ea",
+                    "on-secondary-container": "#00302c",
+                    "inverse-primary": "#674bb5",
+                    "on-tertiary": "#32009a",
+                    "surface-container-lowest": "#0a0e13",
+                    "surface-container": "#1c2025",
+                    "on-error": "#690005",
+                    "primary-container": "#a78bfa",
+                    "secondary": "#62d9cc",
+                    "surface-tint": "#cebdff",
+                    "on-primary-fixed-variant": "#4f319c",
+                    "surface-dim": "#101419",
+                    "on-primary": "#381385",
+                    "on-tertiary-fixed": "#1c0062",
+                    "surface": "#101419",
+                    "surface-container-highest": "#31353b",
+                    "secondary-container": "#11a296",
+                    "on-secondary-fixed-variant": "#00504a",
+                    "background": "#101419",
+                    "primary-fixed-dim": "#cebdff",
+                    "surface-container-high": "#262a30",
+                    "inverse-on-surface": "#2d3136",
+                    "tertiary-fixed-dim": "#cabeff",
+                    "surface-variant": "#31353b",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#003733",
+                    "on-tertiary-container": "#3600a4",
+                    "inverse-surface": "#e0e2ea",
+                    "on-primary-container": "#3c1989",
+                    "on-surface": "#e0e2ea",
+                    "secondary-fixed-dim": "#62d9cc",
+                    "tertiary": "#cabeff",
+                    "secondary-fixed": "#80f6e8",
+                    "surface-container-low": "#181c21",
+                    "surface-bright": "#36393f",
+                    "on-surface-variant": "#cac4d4",
+                    "tertiary-container": "#a18cff",
+                    "tertiary-fixed": "#e6deff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "grid-gutter": "16px",
+                    "stack-gap-lg": "32px",
+                    "stack-gap-md": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0B0F14;
+            color: #e0e2ea;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .privacy-glow {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .ai-thought-glow {
+            box-shadow: 0 0 40px -10px rgba(167, 139, 250, 0.15);
+        }
+
+        .pensieve-orb-gradient {
+            background: radial-gradient(circle at center, #A78BFA 0%, #7C5CFC 100%);
+        }
+
+        @keyframes pulse-orb {
+            0%, 100% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .orb-pulse {
+            animation: pulse-orb 4s ease-in-out infinite;
+        }
+
+        .glass-card {
+            background: rgba(18, 25, 35, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-container-margin py-4 bg-background dark:bg-background sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary">shield_lock</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">Pensieve</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined text-primary dark:text-primary">settings</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-container-margin pt-6 pb-32 max-w-3xl mx-auto w-full">
+<!-- Question Section -->
+<section class="mb-10 text-center">
+<span class="font-label-sm text-label-sm text-outline-variant uppercase tracking-widest mb-2 block">RECALL INQUIRY</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">
+                "What did I learn about AI last week?"
+            </h2>
+</section>
+<!-- The Answer Card (Elevated Local-answer) -->
+<div class="glass-card rounded-[20px] p-8 mb-12 relative overflow-hidden ai-thought-glow">
+<!-- Subtle atmospheric glow source -->
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-[60px]"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary">Synthesized locally</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+                    Last week, you explored the concept of <span class="text-primary font-semibold">"Constitutional AI,"</span> focusing on how human-aligned principles are used to train large models without manual labeling. You also noted a shift in your perception of AI as a <span class="italic text-secondary">"collaborative mirror"</span> rather than just a tool for automation after reading a paper on human-AI resonance.
+                </p>
+</div>
+</div>
+<!-- Evidence Section -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Evidence</h3>
+<span class="px-3 py-1 rounded-full border border-outline-variant/30 font-label-sm text-label-sm text-outline-variant">3 Memories Found</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Evidence Card 1 -->
+<div class="bg-surface-container-low p-5 rounded-[20px] border border-outline-variant/10 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="font-label-sm text-label-sm text-outline">Oct 14, 2023</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">history_edu</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+                        Drafting thoughts on Anthropic's latest approach to AI safety and the 'Constitutional' layer.
+                    </p>
+</div>
+<!-- Evidence Card 2 -->
+<div class="bg-surface-container-low p-5 rounded-[20px] border border-outline-variant/10 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-3">
+<span class="font-label-sm text-label-sm text-outline">Oct 16, 2023</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">mic</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+                        Voice note: Thinking about the mirror effect in AI interactions. Feeling inspired by the idea of resonance.
+                    </p>
+</div>
+<!-- Evidence Card 3 -->
+<div class="bg-surface-container-low p-5 rounded-[20px] border border-outline-variant/10 hover:border-primary/30 transition-colors cursor-pointer group md:col-span-2">
+<div class="flex justify-between items-start mb-3">
+<span class="font-label-sm text-label-sm text-outline">Oct 18, 2023</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">description</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+                        Saved excerpt from "The Future of Digital Solitude" regarding AI's role in personal growth.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Follow-up Action -->
+<div class="flex flex-col items-center justify-center gap-4 py-8">
+<p class="font-label-md text-label-md text-outline-variant">Want to dive deeper into these thoughts?</p>
+<button class="group relative flex items-center gap-3 bg-primary-container px-8 py-4 rounded-full text-on-primary-container font-headline-md shadow-lg transition-transform active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+<span>Talk about it</span>
+<!-- Atmospheric glow on hover -->
+<div class="absolute inset-0 rounded-full bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-surface-container dark:bg-surface-container shadow-lg rounded-t-xl border-t border-outline-variant/10">
+<!-- Talk -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">mic</span>
+<span class="font-label-sm text-label-sm">Talk</span>
+</a>
+<!-- Vault -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">inventory_2</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+<!-- Recall (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary dark:text-primary rounded-full px-5 py-2 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="font-label-sm text-label-sm">Recall</span>
+</a>
+<!-- Privacy -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">encrypted</span>
+<span class="font-label-sm text-label-sm">Privacy</span>
+</a>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        // Simple listener for interactions
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', (e) => {
+                // Prevent default for demo
+                if (el.tagName === 'A' && el.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body></html>

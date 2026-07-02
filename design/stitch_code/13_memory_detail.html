@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Memory Detail | Pensieve</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#948e9d",
+                    "outline-variant": "#494552",
+                    "primary": "#cebdff",
+                    "on-primary-fixed": "#21005e",
+                    "primary-fixed": "#e8ddff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-tertiary-fixed-variant": "#4918c8",
+                    "on-background": "#e0e2ea",
+                    "on-secondary-container": "#00302c",
+                    "inverse-primary": "#674bb5",
+                    "on-tertiary": "#32009a",
+                    "surface-container-lowest": "#0a0e13",
+                    "surface-container": "#1c2025",
+                    "on-error": "#690005",
+                    "primary-container": "#a78bfa",
+                    "secondary": "#62d9cc",
+                    "surface-tint": "#cebdff",
+                    "on-primary-fixed-variant": "#4f319c",
+                    "surface-dim": "#101419",
+                    "on-primary": "#381385",
+                    "on-tertiary-fixed": "#1c0062",
+                    "surface": "#101419",
+                    "surface-container-highest": "#31353b",
+                    "secondary-container": "#11a296",
+                    "on-secondary-fixed-variant": "#00504a",
+                    "background": "#101419",
+                    "primary-fixed-dim": "#cebdff",
+                    "surface-container-high": "#262a30",
+                    "inverse-on-surface": "#2d3136",
+                    "tertiary-fixed-dim": "#cabeff",
+                    "surface-variant": "#31353b",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#003733",
+                    "on-tertiary-container": "#3600a4",
+                    "inverse-surface": "#e0e2ea",
+                    "on-primary-container": "#3c1989",
+                    "on-surface": "#e0e2ea",
+                    "secondary-fixed-dim": "#62d9cc",
+                    "tertiary": "#cabeff",
+                    "secondary-fixed": "#80f6e8",
+                    "surface-container-low": "#181c21",
+                    "surface-bright": "#36393f",
+                    "on-surface-variant": "#cac4d4",
+                    "tertiary-container": "#a18cff",
+                    "tertiary-fixed": "#e6deff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "grid-gutter": "16px",
+                    "stack-gap-lg": "32px",
+                    "stack-gap-md": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(18, 25, 35, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .privacy-glow {
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        body {
+            background-color: #0B0F14;
+            color: #e0e2ea;
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .orb-flicker {
+            animation: flicker 4s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.1; transform: scale(1); }
+            100% { opacity: 0.15; transform: scale(1.1); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="bg-background dark:bg-background flex justify-between items-center w-full px-container-margin py-4 docked full-width top-0 sticky z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="shield_lock">shield_lock</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">Pensieve</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="flex-grow px-container-margin pb-32 pt-4 max-w-3xl mx-auto w-full">
+<!-- Background Atmospheric Element -->
+<div class="fixed top-1/4 right-0 w-64 h-64 bg-primary-container/5 rounded-full blur-[100px] pointer-events-none orb-flicker"></div>
+<!-- Header Content -->
+<section class="mb-stack-gap-lg">
+<div class="flex items-start justify-between mb-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">The Creative Epiphany in the Forest</h2>
+<button class="p-2 rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-3 text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                    October 24, 2023
+                </span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<div class="flex gap-2">
+<span class="px-3 py-0.5 border border-secondary/30 text-secondary rounded-full font-label-sm text-label-sm">Creative</span>
+<span class="px-3 py-0.5 border border-outline-variant/30 text-on-surface-variant rounded-full font-label-sm text-label-sm">Nature</span>
+</div>
+</div>
+</section>
+<!-- Summary & Transcript -->
+<div class="space-y-stack-gap-md">
+<!-- Summary Card -->
+<div class="glass-panel privacy-glow rounded-[20px] p-6">
+<div class="flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<h3 class="font-label-md text-label-md uppercase tracking-wider">AI Insight Summary</h3>
+</div>
+<p class="text-body-lg font-body-lg text-on-surface leading-relaxed">
+                    You realized that the structure of your new project should mimic the fractal growth of ferns. The silence of the Redwood grove helped you disconnect from the linear logic of the office and embrace a more organic, branching architecture for the data pipeline.
+                </p>
+</div>
+<!-- Original Transcript -->
+<div class="p-6 border border-outline-variant/10 rounded-[20px] bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant">Original Reflection</h3>
+<button class="text-primary font-label-sm text-label-sm hover:underline">Listen to audio</button>
+</div>
+<div class="text-on-surface-variant italic space-y-4">
+<p>"I'm standing here, surrounded by these massive trees... and I just looked at a fern. It's so clear now. Why am I forcing the database to be a grid? It should be a tree. Every node is a replica of the whole. It scales perfectly. I feel... relieved. It’s like the solution was just waiting in the soil."</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<section class="mt-stack-gap-lg grid grid-cols-2 md:grid-cols-4 gap-3">
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl glass-panel hover:bg-white/5 transition-colors border-none">
+<span class="material-symbols-outlined text-primary" data-icon="edit">edit</span>
+<span class="font-label-md text-label-md">Edit tags</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl glass-panel hover:bg-white/5 transition-colors border-none">
+<span class="material-symbols-outlined text-primary" data-icon="archive">archive</span>
+<span class="font-label-md text-label-md">Archive</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-error-container/10 hover:bg-error-container/20 transition-colors border border-error/20 col-span-2 md:col-span-1">
+<span class="material-symbols-outlined text-error" data-icon="delete">delete</span>
+<span class="font-label-md text-label-md text-error">Delete</span>
+</button>
+<button class="hidden md:flex items-center justify-center gap-2 py-3 px-4 rounded-xl glass-panel hover:bg-white/5 transition-colors border-none">
+<span class="material-symbols-outlined text-primary" data-icon="share">share</span>
+<span class="font-label-md text-label-md">Export</span>
+</button>
+</section>
+<!-- Related Memories (Bento Style) -->
+<section class="mt-stack-gap-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-gap-md">Related Threads</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-grid-gutter">
+<!-- Related Card 1 -->
+<div class="glass-panel p-5 rounded-[20px] group cursor-pointer hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container text-on-surface-variant text-[10px] uppercase font-bold rounded">July 12</span>
+<span class="px-2 py-0.5 bg-secondary-container/20 text-secondary text-[10px] uppercase font-bold rounded">Evidence</span>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-2">First Sketch of the Data Pipe</h4>
+<p class="text-label-sm text-on-surface-variant line-clamp-2">The initial frustration with linear scaling. You noted that the 'bottleneck is structural, not technical'.</p>
+</div>
+<!-- Related Card 2 -->
+<div class="glass-panel p-5 rounded-[20px] group cursor-pointer hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container text-on-surface-variant text-[10px] uppercase font-bold rounded">Aug 05</span>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-2">Muir Woods Audio Journal</h4>
+<p class="text-label-sm text-on-surface-variant line-clamp-2">Mentioned the desire to bring natural patterns into your engineering work.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container dark:bg-surface-container border-t border-outline-variant/10 shadow-lg rounded-t-xl md:px-container-margin">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+<span class="font-label-sm text-label-sm mt-1">Talk</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm mt-1">Vault</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary dark:text-primary rounded-full px-4 py-1 scale-95 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="font-label-sm text-label-sm mt-1">Recall</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="encrypted">encrypted</span>
+<span class="font-label-sm text-label-sm mt-1">Privacy</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for the detail page
+        document.querySelectorAll('.glass-panel').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'rgba(167, 139, 250, 0.2)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+            });
+        });
+    </script>
+</body></html>

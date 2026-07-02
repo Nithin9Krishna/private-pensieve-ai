@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pensieve - Talk</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#948e9d",
+                    "outline-variant": "#494552",
+                    "primary": "#cebdff",
+                    "on-primary-fixed": "#21005e",
+                    "primary-fixed": "#e8ddff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-tertiary-fixed-variant": "#4918c8",
+                    "on-background": "#e0e2ea",
+                    "on-secondary-container": "#00302c",
+                    "inverse-primary": "#674bb5",
+                    "on-tertiary": "#32009a",
+                    "surface-container-lowest": "#0a0e13",
+                    "surface-container": "#1c2025",
+                    "on-error": "#690005",
+                    "primary-container": "#a78bfa",
+                    "secondary": "#62d9cc",
+                    "surface-tint": "#cebdff",
+                    "on-primary-fixed-variant": "#4f319c",
+                    "surface-dim": "#101419",
+                    "on-primary": "#381385",
+                    "on-tertiary-fixed": "#1c0062",
+                    "surface": "#101419",
+                    "surface-container-highest": "#31353b",
+                    "secondary-container": "#11a296",
+                    "on-secondary-fixed-variant": "#00504a",
+                    "background": "#101419",
+                    "primary-fixed-dim": "#cebdff",
+                    "surface-container-high": "#262a30",
+                    "inverse-on-surface": "#2d3136",
+                    "tertiary-fixed-dim": "#cabeff",
+                    "surface-variant": "#31353b",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#003733",
+                    "on-tertiary-container": "#3600a4",
+                    "inverse-surface": "#e0e2ea",
+                    "on-primary-container": "#3c1989",
+                    "on-surface": "#e0e2ea",
+                    "secondary-fixed-dim": "#62d9cc",
+                    "tertiary": "#cabeff",
+                    "secondary-fixed": "#80f6e8",
+                    "surface-container-low": "#181c21",
+                    "surface-bright": "#36393f",
+                    "on-surface-variant": "#cac4d4",
+                    "tertiary-container": "#a18cff",
+                    "tertiary-fixed": "#e6deff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "grid-gutter": "16px",
+                    "stack-gap-lg": "32px",
+                    "stack-gap-md": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0B0F14;
+            color: #e0e2ea;
+            overflow: hidden;
+        }
+
+        .pensieve-orb {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #A78BFA, #7C5CFC, #3c1989);
+            box-shadow: 0 0 60px rgba(167, 139, 250, 0.3), inset -10px -10px 40px rgba(0,0,0,0.4);
+            animation: orb-pulse 8s ease-in-out infinite;
+            position: relative;
+        }
+
+        .pensieve-orb::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            pointer-events: none;
+        }
+
+        .privacy-glow {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes orb-pulse {
+            0%, 100% { transform: scale(1); filter: brightness(1) blur(0px); }
+            50% { transform: scale(1.05); filter: brightness(1.1) blur(1px); }
+        }
+
+        .mic-active-glow {
+            box-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen font-body-md bg-background dark:bg-background">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center w-full px-container-margin py-4 fixed top-0 z-50 bg-background dark:bg-background">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="shield_lock">shield_lock</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Pensieve</span>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-container-margin pt-20 pb-40 relative overflow-hidden">
+<!-- Status Pills -->
+<div class="flex gap-stack-gap-md mb-stack-gap-lg fade-in" style="animation-delay: 0.2s">
+<div class="px-3 py-1 rounded-full border border-secondary text-secondary font-label-sm text-label-sm">
+                Local-only
+            </div>
+<div class="px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant font-label-sm text-label-sm">
+                Offline ready
+            </div>
+</div>
+<!-- The Pensieve Orb -->
+<div class="relative flex items-center justify-center mb-12 fade-in" style="animation-delay: 0.4s">
+<div class="pensieve-orb"></div>
+<!-- Atmospheric glow behind orb -->
+<div class="absolute w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -z-10"></div>
+</div>
+<!-- Messaging -->
+<div class="text-center space-y-3 fade-in" style="animation-delay: 0.6s">
+<h1 class="font-display text-display text-on-background">I’m here.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">
+                Talk freely. I’ll remember what matters.
+            </p>
+</div>
+<!-- Floating Interaction Area -->
+<div class="fixed bottom-32 left-0 w-full flex flex-col items-center gap-6 fade-in" style="animation-delay: 0.8s">
+<div class="flex flex-col items-center gap-3 group">
+<button class="w-20 h-20 rounded-full bg-[#1E2A38] border-2 border-primary flex items-center justify-center text-primary transition-all duration-300 active:scale-90 mic-active-glow" id="mic-btn">
+<span class="material-symbols-outlined text-4xl" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+<span class="font-label-md text-label-md text-primary opacity-80 uppercase tracking-widest">Hold to Speak</span>
+</div>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200">
+                Write instead
+            </button>
+</div>
+<!-- Footer Privacy Note -->
+<footer class="fixed bottom-24 left-0 w-full text-center fade-in" style="animation-delay: 1s">
+<p class="font-label-sm text-label-sm text-outline-variant">
+                Your memories stay on this device.
+            </p>
+</footer>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container dark:bg-surface-container shadow-lg border-t border-outline-variant/10 rounded-t-xl">
+<!-- Talk (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary dark:text-primary rounded-full px-4 py-1 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+<span class="font-label-sm text-label-sm mt-1">Talk</span>
+</a>
+<!-- Vault -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm mt-1">Vault</span>
+</a>
+<!-- Recall -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="font-label-sm text-label-sm mt-1">Recall</span>
+</a>
+<!-- Privacy -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="encrypted">encrypted</span>
+<span class="font-label-sm text-label-sm mt-1">Privacy</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for the Mic Button
+        const micBtn = document.getElementById('mic-btn');
+        let isHolding = false;
+
+        const startListening = () => {
+            isHolding = true;
+            micBtn.classList.add('scale-110', 'bg-primary-container/30');
+            // Logic for orb ripples could be triggered here
+            document.querySelector('.pensieve-orb').style.animation = 'orb-pulse 1.5s ease-in-out infinite';
+        };
+
+        const stopListening = () => {
+            isHolding = false;
+            micBtn.classList.remove('scale-110', 'bg-primary-container/30');
+            document.querySelector('.pensieve-orb').style.animation = 'orb-pulse 8s ease-in-out infinite';
+        };
+
+        micBtn.addEventListener('mousedown', startListening);
+        micBtn.addEventListener('mouseup', stopListening);
+        micBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startListening();
+        });
+        micBtn.addEventListener('touchend', stopListening);
+    </script>
+</body></html>

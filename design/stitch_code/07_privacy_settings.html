@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Privacy - Pensieve</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#948e9d",
+                        "outline-variant": "#494552",
+                        "primary": "#cebdff",
+                        "on-primary-fixed": "#21005e",
+                        "primary-fixed": "#e8ddff",
+                        "on-secondary-fixed": "#00201d",
+                        "on-tertiary-fixed-variant": "#4918c8",
+                        "on-background": "#e0e2ea",
+                        "on-secondary-container": "#00302c",
+                        "inverse-primary": "#674bb5",
+                        "on-tertiary": "#32009a",
+                        "surface-container-lowest": "#0a0e13",
+                        "surface-container": "#1c2025",
+                        "on-error": "#690005",
+                        "primary-container": "#a78bfa",
+                        "secondary": "#62d9cc",
+                        "surface-tint": "#cebdff",
+                        "on-primary-fixed-variant": "#4f319c",
+                        "surface-dim": "#101419",
+                        "on-primary": "#381385",
+                        "on-tertiary-fixed": "#1c0062",
+                        "surface": "#101419",
+                        "surface-container-highest": "#31353b",
+                        "secondary-container": "#11a296",
+                        "on-secondary-fixed-variant": "#00504a",
+                        "background": "#101419",
+                        "primary-fixed-dim": "#cebdff",
+                        "surface-container-high": "#262a30",
+                        "inverse-on-surface": "#2d3136",
+                        "tertiary-fixed-dim": "#cabeff",
+                        "surface-variant": "#31353b",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#003733",
+                        "on-tertiary-container": "#3600a4",
+                        "inverse-surface": "#e0e2ea",
+                        "on-primary-container": "#3c1989",
+                        "on-surface": "#e0e2ea",
+                        "secondary-fixed-dim": "#62d9cc",
+                        "tertiary": "#cabeff",
+                        "secondary-fixed": "#80f6e8",
+                        "surface-container-low": "#181c21",
+                        "surface-bright": "#36393f",
+                        "on-surface-variant": "#cac4d4",
+                        "tertiary-container": "#a18cff",
+                        "tertiary-fixed": "#e6deff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap-sm": "8px",
+                        "grid-gutter": "16px",
+                        "stack-gap-lg": "32px",
+                        "stack-gap-md": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .privacy-glow {
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        .ethereal-blur {
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+        .orb-pulse {
+            animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary/30 min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin py-4 bg-background dark:bg-background transition-opacity duration-300">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">Pensieve</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md">settings</span>
+</button>
+</header>
+<main class="pt-24 px-container-margin max-w-2xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-stack-gap-lg text-center">
+<div class="relative inline-block mb-6">
+<div class="w-32 h-32 rounded-full bg-gradient-to-tr from-[#A78BFA] to-[#7C5CFC] orb-pulse blur-xl opacity-20 absolute inset-0"></div>
+<div class="w-32 h-32 rounded-full bg-gradient-to-tr from-[#A78BFA] to-[#7C5CFC] orb-pulse relative flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'wght' 200;">fingerprint</span>
+</div>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Privacy, by design</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Your memories do not leave this device.</p>
+</section>
+<!-- Status Cards (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-stack-gap-lg">
+<!-- Large Status Header -->
+<div class="md:col-span-2 p-6 rounded-[20px] bg-surface-container-high privacy-glow flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1">Current State</p>
+<p class="font-headline-md text-headline-md text-on-surface">Secure & Isolated</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-4xl">verified_user</span>
+</div>
+<!-- Status Rows -->
+<div class="p-5 rounded-[20px] bg-surface-container privacy-glow flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">person_off</span>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Account</p>
+<p class="font-body-md text-body-md text-on-surface">Not required</p>
+</div>
+</div>
+<div class="p-5 rounded-[20px] bg-surface-container privacy-glow flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">dns</span>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Server</p>
+<p class="font-body-md text-body-md text-on-surface">Not used</p>
+</div>
+</div>
+<div class="p-5 rounded-[20px] bg-surface-container privacy-glow flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">cloud_off</span>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Cloud</p>
+<p class="font-body-md text-body-md text-on-surface">Not used</p>
+</div>
+</div>
+<div class="p-5 rounded-[20px] bg-surface-container privacy-glow flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">language</span>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Internet</p>
+<p class="font-body-md text-body-md text-on-surface">Not required</p>
+</div>
+</div>
+<div class="p-5 rounded-[20px] bg-surface-container privacy-glow flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant">AI</p>
+<p class="font-body-md text-body-md text-on-surface">On-device</p>
+</div>
+<div class="px-3 py-1 rounded-full border border-secondary text-secondary font-label-sm text-[10px] uppercase">Local</div>
+</div>
+<div class="p-5 rounded-[20px] bg-surface-container privacy-glow flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">lock</span>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Memories</p>
+<p class="font-body-md text-body-md text-on-surface">Encrypted locally</p>
+</div>
+</div>
+<div class="md:col-span-2 p-5 rounded-[20px] bg-surface-container privacy-glow flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">visibility_off</span>
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tracking</p>
+<p class="font-body-md text-body-md text-on-surface">None</p>
+</div>
+</div>
+</section>
+<!-- Action Section -->
+<section class="space-y-4 mb-12">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest px-2">Data Management</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-colors duration-200 border border-outline-variant/20 text-on-surface">
+<span class="material-symbols-outlined">file_export</span>
+<span class="font-label-md text-label-md">Export encrypted backup</span>
+</button>
+<button class="flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-colors duration-200 border border-outline-variant/20 text-on-surface">
+<span class="material-symbols-outlined">file_export</span>
+<span class="font-label-md text-label-md">Import backup</span>
+</button>
+</div>
+<div class="pt-4 border-t border-outline-variant/10 space-y-3">
+<button class="w-full flex items-center justify-between px-6 py-4 rounded-xl bg-surface-container-low hover:bg-error-container/10 group transition-all duration-200">
+<span class="font-body-md text-body-md text-on-surface group-hover:text-error transition-colors">Delete audio recordings</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-error">mic_off</span>
+</button>
+<button class="w-full flex items-center justify-between px-6 py-4 rounded-xl bg-error-container/20 hover:bg-error-container/40 group transition-all duration-300 border border-error/10">
+<span class="font-body-md text-body-md text-error font-semibold">Delete all memories</span>
+<span class="material-symbols-outlined text-error">delete_forever</span>
+</button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant italic pt-2">
+                    These actions are final and cannot be undone.
+                </p>
+</div>
+</section>
+<!-- Illustration / Mood -->
+<div class="relative w-full h-48 rounded-[20px] overflow-hidden mb-12 opacity-60">
+<div class="bg-cover bg-center w-full h-full grayscale-[0.5]" data-alt="A macro photography shot of deep obsidian glass with micro-textures, refracting soft lavender and teal light from an unseen source. The composition is atmospheric and quiet, suggesting a secure, impenetrable vault or an intimate digital journal space. Professional high-end UI product photography style with cinematic lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8S-C7zbaKS1o55yAZcrGwGluJVFX5toHVMuBuHz7i3KIDb4RWkJVwhc7wyv1iCZee03d4GVozGl9yw0M1DvuSB146uGB8WxP_xaiZ8j1lbb3LBb38EKjcT6gf9tOHfmTVTjX_YDDF2wOATQzEBJ1w0n13caF2Vlwy2XurUSy_5J01r7G4K2_-KCQndxivAjSNY6tZAisE3VI_tHuU6b141rd8EyX35lXrILiX2SbOhMqIPnRNL-gvxXL-HtJjREBY7eEiE1BLNXM')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container dark:bg-surface-container border-t border-outline-variant/10 shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">mic</span>
+<span class="font-label-sm text-label-sm">Talk</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">inventory_2</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">history_edu</span>
+<span class="font-label-sm text-label-sm">Recall</span>
+</a>
+<!-- Active Tab: Privacy -->
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary dark:text-primary rounded-full px-4 py-1 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">encrypted</span>
+<span class="font-label-sm text-label-sm">Privacy</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for destructive buttons
+        document.querySelectorAll('.bg-error-container\\/20').forEach(button => {
+            button.addEventListener('click', () => {
+                if (confirm('Are you absolutely sure? This will permanently wipe your local data.')) {
+                    alert('Data deletion sequence initiated.');
+                }
+            });
+        });
+
+        // Simple parallax effect for the orb
+        window.addEventListener('mousemove', (e) => {
+            const orb = document.querySelector('.orb-pulse');
+            if (orb) {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+                orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pensieve - Your Vault</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#948e9d",
+                    "outline-variant": "#494552",
+                    "primary": "#cebdff",
+                    "on-primary-fixed": "#21005e",
+                    "primary-fixed": "#e8ddff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-tertiary-fixed-variant": "#4918c8",
+                    "on-background": "#e0e2ea",
+                    "on-secondary-container": "#00302c",
+                    "inverse-primary": "#674bb5",
+                    "on-tertiary": "#32009a",
+                    "surface-container-lowest": "#0a0e13",
+                    "surface-container": "#1c2025",
+                    "on-error": "#690005",
+                    "primary-container": "#a78bfa",
+                    "secondary": "#62d9cc",
+                    "surface-tint": "#cebdff",
+                    "on-primary-fixed-variant": "#4f319c",
+                    "surface-dim": "#101419",
+                    "on-primary": "#381385",
+                    "on-tertiary-fixed": "#1c0062",
+                    "surface": "#101419",
+                    "surface-container-highest": "#31353b",
+                    "secondary-container": "#11a296",
+                    "on-secondary-fixed-variant": "#00504a",
+                    "background": "#101419",
+                    "primary-fixed-dim": "#cebdff",
+                    "surface-container-high": "#262a30",
+                    "inverse-on-surface": "#2d3136",
+                    "tertiary-fixed-dim": "#cabeff",
+                    "surface-variant": "#31353b",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#003733",
+                    "on-tertiary-container": "#3600a4",
+                    "inverse-surface": "#e0e2ea",
+                    "on-primary-container": "#3c1989",
+                    "on-surface": "#e0e2ea",
+                    "secondary-fixed-dim": "#62d9cc",
+                    "tertiary": "#cabeff",
+                    "secondary-fixed": "#80f6e8",
+                    "surface-container-low": "#181c21",
+                    "surface-bright": "#36393f",
+                    "on-surface-variant": "#cac4d4",
+                    "tertiary-container": "#a18cff",
+                    "tertiary-fixed": "#e6deff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "grid-gutter": "16px",
+                    "stack-gap-lg": "32px",
+                    "stack-gap-md": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0B0F14;
+            color: #e0e2ea;
+            -webkit-font-smoothing: antialiased;
+        }
+        .privacy-glow {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-card {
+            background: #121923;
+            border: 1px solid #1E2A38;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="bg-background dark:bg-background flex justify-between items-center w-full px-container-margin py-4 docked full-width top-0 z-40 transition-opacity duration-300">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary" style="font-size: 28px;">shield_lock</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">Pensieve</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-on-surface-variant">settings</span>
+</button>
+</header>
+<main class="px-container-margin mt-4">
+<!-- Header Section -->
+<section class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">Your Vault</h2>
+<p class="text-on-surface-variant font-body-md">Private memories, stored on this device.</p>
+</section>
+<!-- Search Field -->
+<div class="relative mb-6">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-4 pl-12 pr-4 text-on-surface focus:ring-2 focus:ring-primary-container/50 placeholder:text-outline-variant font-body-md transition-all" placeholder="Search your memories..." type="text"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex overflow-x-auto gap-3 mb-8 scrollbar-hide -mx-container-margin px-container-margin">
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md transition-all">All</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-all">Important</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-all">Goals</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-all">People</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-all">Ideas</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-all">Feelings</button>
+</div>
+<!-- Memory Cards List -->
+<div class="flex flex-col gap-4">
+<!-- Card 1 -->
+<article class="glass-card rounded-[20px] p-5 active:scale-[0.98] transition-transform duration-200 cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
+<span class="text-label-sm font-label-sm text-outline capitalize">Oct 24, 2023</span>
+</div>
+<button class="text-outline-variant hover:text-amber-400 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">The Philosophy of Quiet</h3>
+<p class="text-on-surface-variant font-body-md line-clamp-2 mb-4">Reflecting on why digital solitude feels so rare today. It's not just about privacy, but about having a space where judgment doesn't exist.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-label-sm font-label-sm text-primary">#Reflection</span>
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-label-sm font-label-sm text-primary">#Idea</span>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="glass-card rounded-[20px] p-5 active:scale-[0.98] transition-transform duration-200 cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-outline capitalize">Oct 22, 2023</span>
+</div>
+<button class="text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">star</span>
+</button>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Project North Star Goals</h3>
+<p class="text-on-surface-variant font-body-md line-clamp-2 mb-4">Outline for the next three months. Focus on core stability and user-centric feedback loops without compromising the "Solitude" mission.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-label-sm font-label-sm text-primary">#Goals</span>
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-label-sm font-label-sm text-primary">#Work</span>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="glass-card rounded-[20px] p-5 active:scale-[0.98] transition-transform duration-200 cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
+<span class="text-label-sm font-label-sm text-outline capitalize">Oct 20, 2023</span>
+</div>
+<button class="text-outline-variant hover:text-amber-400 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">A Walk in the Rain</h3>
+<p class="text-on-surface-variant font-body-md line-clamp-2 mb-4">The way the city sounds when muffled by water. Every car becomes a wave. Every umbrella a small, private island of safety.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-label-sm font-label-sm text-primary">#Feelings</span>
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-label-sm font-label-sm text-primary">#Personal</span>
+</div>
+</article>
+<!-- Card 4 (Empty-ish / Smaller) -->
+<article class="glass-card rounded-[20px] p-5 active:scale-[0.98] transition-transform duration-200 cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-outline capitalize">Oct 18, 2023</span>
+</div>
+<button class="text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">star</span>
+</button>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Meeting Sarah</h3>
+<p class="text-on-surface-variant font-body-md line-clamp-2 mb-4">Discussed the upcoming design changes. She liked the atmospheric depth approach but warned about over-using blurs.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-label-sm font-label-sm text-primary">#People</span>
+</div>
+</article>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container dark:bg-surface-container shadow-lg border-t border-outline-variant/10 rounded-t-xl">
+<!-- Talk -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">mic</span>
+<span class="font-label-sm text-label-sm">Talk</span>
+</a>
+<!-- Vault (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary dark:text-primary rounded-full px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+<!-- Recall -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">history_edu</span>
+<span class="font-label-sm text-label-sm">Recall</span>
+</a>
+<!-- Privacy -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">encrypted</span>
+<span class="font-label-sm text-label-sm">Privacy</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for filter chips
+        const chips = document.querySelectorAll('.scrollbar-hide button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                chip.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                chip.classList.add('bg-primary-container', 'text-on-primary-container');
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

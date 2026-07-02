@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pensieve - Digital Solitude</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#948e9d",
+                    "outline-variant": "#494552",
+                    "primary": "#cebdff",
+                    "on-primary-fixed": "#21005e",
+                    "primary-fixed": "#e8ddff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-tertiary-fixed-variant": "#4918c8",
+                    "on-background": "#e0e2ea",
+                    "on-secondary-container": "#00302c",
+                    "inverse-primary": "#674bb5",
+                    "on-tertiary": "#32009a",
+                    "surface-container-lowest": "#0a0e13",
+                    "surface-container": "#1c2025",
+                    "on-error": "#690005",
+                    "primary-container": "#a78bfa",
+                    "secondary": "#62d9cc",
+                    "surface-tint": "#cebdff",
+                    "on-primary-fixed-variant": "#4f319c",
+                    "surface-dim": "#101419",
+                    "on-primary": "#381385",
+                    "on-tertiary-fixed": "#1c0062",
+                    "surface": "#101419",
+                    "surface-container-highest": "#31353b",
+                    "secondary-container": "#11a296",
+                    "on-secondary-fixed-variant": "#00504a",
+                    "background": "#101419",
+                    "primary-fixed-dim": "#cebdff",
+                    "surface-container-high": "#262a30",
+                    "inverse-on-surface": "#2d3136",
+                    "tertiary-fixed-dim": "#cabeff",
+                    "surface-variant": "#31353b",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#003733",
+                    "on-tertiary-container": "#3600a4",
+                    "inverse-surface": "#e0e2ea",
+                    "on-primary-container": "#3c1989",
+                    "on-surface": "#e0e2ea",
+                    "secondary-fixed-dim": "#62d9cc",
+                    "tertiary": "#cabeff",
+                    "secondary-fixed": "#80f6e8",
+                    "surface-container-low": "#181c21",
+                    "surface-bright": "#36393f",
+                    "on-surface-variant": "#cac4d4",
+                    "tertiary-container": "#a18cff",
+                    "tertiary-fixed": "#e6deff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap-sm": "8px",
+                    "grid-gutter": "16px",
+                    "stack-gap-lg": "32px",
+                    "stack-gap-md": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0B0F14;
+            color: #e0e2ea;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* The Pensieve Orb Animations */
+        @keyframes pulse-orb {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+
+        .orb-glow {
+            background: radial-gradient(circle, #A78BFA 0%, #7C5CFC 100%);
+            box-shadow: 0 0 60px 10px rgba(167, 139, 250, 0.3);
+        }
+
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid #A78BFA;
+            animation: ripple 3s infinite cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Waveform simulation */
+        .waveform-bar {
+            width: 3px;
+            background-color: #cebdff;
+            border-radius: 2px;
+            animation: waveform-jump 1.2s infinite ease-in-out;
+        }
+
+        @keyframes waveform-jump {
+            0%, 100% { height: 8px; }
+            50% { height: 24px; }
+        }
+
+        /* Transcription text fading */
+        .transcription-fade {
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+
+        .privacy-glow-border {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md flex flex-col items-center">
+<!-- TopAppBar Navigation Shell -->
+<header class="flex justify-between items-center w-full px-container-margin py-4 fixed top-0 z-50 bg-background dark:bg-background">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">Pensieve</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-300">
+<span class="material-symbols-outlined text-primary dark:text-primary">settings</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center w-full max-w-md px-container-margin pt-16 pb-32 overflow-hidden">
+<!-- Status Indicator -->
+<div class="mb-12 flex flex-col items-center gap-2">
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1 rounded-full privacy-glow-border">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#62d9cc]"></span>
+<span class="text-label-sm font-label-sm tracking-widest uppercase text-on-surface-variant">Local-only Encryption</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile mt-4 text-on-surface text-center">Listening...</h2>
+</div>
+<!-- The Pensieve Orb Section -->
+<div class="relative w-72 h-72 flex items-center justify-center mb-16">
+<!-- Ripple layers -->
+<div class="ripple-effect w-32 h-32"></div>
+<div class="ripple-effect w-32 h-32" style="animation-delay: 1s;"></div>
+<div class="ripple-effect w-32 h-32" style="animation-delay: 2s;"></div>
+<!-- The Orb -->
+<div class="orb-glow w-32 h-32 rounded-full flex items-center justify-center relative z-10 animate-[pulse-orb_4s_infinite_ease-in-out]">
+<!-- Subtle internal light rotation can be done with threejs but we'll use CSS here for simplicity as requested -->
+<div class="absolute inset-0 rounded-full opacity-40 bg-[conic-gradient(from_0deg,#A78BFA,#7C5CFC,#A78BFA)] animate-[spin_10s_linear_infinite]"></div>
+</div>
+<!-- Restrained Waveform Orbiting -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="flex gap-1 items-center h-12">
+<div class="waveform-bar" style="animation-delay: 0.1s"></div>
+<div class="waveform-bar" style="animation-delay: 0.3s"></div>
+<div class="waveform-bar" style="animation-delay: 0.2s"></div>
+<div class="waveform-bar" style="animation-delay: 0.5s"></div>
+<div class="waveform-bar" style="animation-delay: 0.4s"></div>
+<div class="waveform-bar" style="animation-delay: 0.6s"></div>
+<div class="waveform-bar" style="animation-delay: 0.2s"></div>
+<div class="waveform-bar" style="animation-delay: 0.7s"></div>
+</div>
+</div>
+</div>
+<!-- Transcription Preview -->
+<div class="w-full text-center px-4 transcription-fade h-24 overflow-hidden relative">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed italic opacity-80" id="transcription-text">
+                ...reflecting on the quiet moments of the morning, the way the light hit the kitchen table...
+            </p>
+</div>
+</main>
+<!-- Bottom Controls & Navigation -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<!-- Active Microphone Action -->
+<div class="flex flex-col items-center mb-28">
+<button class="w-20 h-20 rounded-full bg-surface-container-high border-2 border-primary-container flex items-center justify-center text-primary shadow-[0_0_30px_rgba(167,139,250,0.4)] scale-110 transition-all duration-300 active:scale-95" id="mic-btn">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+<p class="mt-4 font-label-sm text-label-sm uppercase tracking-widest text-primary-container animate-pulse">Hold to Speak</p>
+</div>
+<!-- Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-surface-container dark:bg-surface-container border-t border-outline-variant/10 shadow-lg rounded-t-xl">
+<!-- Talk (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary dark:text-primary rounded-full px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+<span class="font-label-sm text-label-sm">Talk</span>
+</a>
+<!-- Vault -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+<!-- Recall -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-label-sm text-label-sm">Recall</span>
+</a>
+<!-- Privacy -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-white/5 transition-transform duration-200 scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">encrypted</span>
+<span class="font-label-sm text-label-sm">Privacy</span>
+</a>
+</nav>
+</div>
+<!-- Atmospheric Micro-interaction Script -->
+<script>
+        const transcriptionLines = [
+            "...just thinking about how peaceful today was...",
+            "...processing the meeting from earlier this afternoon...",
+            "...the colors of the sunset were particularly deep tonight...",
+            "...remembering that book I started reading yesterday...",
+            "...feeling a sense of accomplishment with the project..."
+        ];
+        
+        const transcriptionEl = document.getElementById('transcription-text');
+        let index = 0;
+
+        // Simulate real-time transcription updates
+        setInterval(() => {
+            transcriptionEl.style.opacity = '0';
+            setTimeout(() => {
+                index = (index + 1) % transcriptionLines.length;
+                transcriptionEl.innerText = transcriptionLines[index];
+                transcriptionEl.style.opacity = '0.8';
+            }, 500);
+        }, 4000);
+
+        // Mic Button Feedback
+        const micBtn = document.getElementById('mic-btn');
+        micBtn.addEventListener('mousedown', () => {
+            micBtn.classList.add('scale-125');
+            micBtn.style.boxShadow = '0 0 50px rgba(167, 139, 250, 0.7)';
+        });
+        micBtn.addEventListener('mouseup', () => {
+            micBtn.classList.remove('scale-125');
+            micBtn.style.boxShadow = '0 0 30px rgba(167, 139, 250, 0.4)';
+        });
+    </script>
+</body></html>
